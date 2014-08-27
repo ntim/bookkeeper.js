@@ -1,12 +1,49 @@
-<div class="container">
-  <div class="jumbotron">
-    <h1>My Scaffolds</h1>
-
-    <h2>...your scaffolds are just a click away.</h2>
-    <% _.each(_.keys(sails.controllers), function(controller) { %>
-
-    <a href="/<%= controller %>" class="btn btn-lg btn-success spar-list"><%= controller %></a>
-
-    <% }) %>
-  </div>
+<%
+var col_class = "col-md-" + Math.round(12 / (persons.length + 1));
+var mean = persons.reduce(function(previous, current, index, array) {
+	    return previous + persons[index].saldo();
+	}, 0.0) / persons.length; 
+%>
+<div class="row">
+    <div class="<%= col_class %>">&nbsp;</div>
+  	<% persons.forEach(function(person) { %>
+  	<div class="<%= col_class %>">
+  		<h2><a href="/person / show / <%= person.id %> "><%= person.name %></a></h2>
+  	</div>
+	<% }) %>
 </div>
+<br>
+<div class="row">
+    <div class="<%= col_class %>">&nbsp;</div>
+  	<% persons.forEach(function(person) { %>
+  	<div class="<%= col_class %>">
+  		<% for(var i = person.expenses.length - 1; i > Math.max(0, person.expenses.length - 12 - 1); i--) { %>
+  		<div class="row">
+  			<div class="col-md-3 text-muted"><%= person.expenses[i].price %> &euro;</div>
+  			<div class="col-md-9 text-muted"><%= person.expenses[i].name %>, <%= person.expenses[i].when %></div>
+  		</div>
+  		<% } %>
+  	</div>
+	<% }) %>
+</div>
+<hr>
+<div class="row">
+  	<div class="<%= col_class %>">Saldo</div>
+	<% persons.forEach(function(person) { %>
+	<div class="<%= col_class %>">
+		<p><%= person.saldo() %> &euro;</p>
+	</div>
+	<% }) %>
+</div>
+<hr>
+<div class="row">
+  	<div class="<%= col_class %>">Delta</div>
+	<% persons.forEach(function(person) { %>
+	<% var delta = mean - person.saldo(); %>
+	<div class="<%= col_class %>">
+		<p class="<%= delta < 0 ? "text-danger" : "text-success" %>"><%= delta %> &euro;</p>
+	</div>
+	<% }) %>
+</div>
+<hr>
+<p><a href="/expense/new" class="btn btn-primary">Create expense</a></p>

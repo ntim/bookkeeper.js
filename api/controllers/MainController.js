@@ -11,6 +11,7 @@ module.exports = {
             if (err) return next(err);
 
             res.view({
+            	title: 'Dashboard',
                 persons: persons
             });
         });

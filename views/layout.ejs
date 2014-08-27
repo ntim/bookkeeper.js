@@ -7,15 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/bootstrapScaffold.css">
+    <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/custom.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
 
   <body>
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+        <div class="navbar-header">
+          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="navbar-brand">Bookkeeper.js</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/person">Persons</a></li>
+            <li><a href="/expense">Expenses</a></li>
+          </ul>
+          <form role="form" class="navbar-form navbar-right" method="POST" action="/session/new">
+            <div class="form-group form-group-sm">
+              <input type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group form-group-sm">
+              <input type="password" class="form-control" placeholder="Password">
+            </div>
+            <button class="btn btn-success btn-sm" type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
     
+    <div class="container">
     <%- body %>
+    </div>
 
     <!--TEMPLATES-->
     
@@ -23,6 +55,8 @@
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>
