@@ -49,6 +49,9 @@ module.exports = {
                 }
                 req.session.authenticated = true;
                 req.session.person = person;
+                if (req.session.redirect) {
+                    return res.redirect(req.session.redirect);
+                }
                 res.redirect('/');
             })
         });

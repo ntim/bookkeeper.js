@@ -24,7 +24,8 @@
     "grunt-contrib-less": "0.11.1",
     "grunt-contrib-coffee": "~0.10.1",
     "sails-generate-scaffold": "~0.0.5",
-    "bcrypt": "~0.8.0"
+    "bcrypt": "~0.8.0",
+    "moment": "~2.8.2"
   },
   "scripts": {
     "start": "node app.js",

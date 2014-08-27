@@ -61,23 +61,25 @@ module.exports = {
 
     edit: function(req, res, next) {
 
-        Expense.findOne(req.param('id'), function foundExpense(err, expense) {
+        Expense.findOne(req.param('id')).populate('person').exec(function foundExpense(err, expense) {
             if (err) return next(err);
             if (!expense) return next('expense doesn\'t exist.');
 
-            res.view({
-                expense: expense
+            Person.find().exec(function(err, people) {
+                if (err) return next(err);
+                if (!people) return next('people don\'t exist.');
+
+                res.view({
+                    expense: expense,
+                    people: people
+                });
             });
         });
     },
 
     update: function(req, res, next) {
 
-        var paramObj = {
-
-        }
-
-        Expense.update(req.param('id'), paramObj, function expenseUpdated(err) {
+        Person.findOneByName(req.param('person')).exec(function(err, person) {
             if (err) {
                 console.log(err);
 
@@ -88,7 +90,26 @@ module.exports = {
                 return res.redirect('/expense/edit/' + req.param('id'));
             }
 
-            res.redirect('/expense/show/' + req.param('id'));
+            var paramObj = {
+                name: req.param('name'),
+                price: req.param('price'),
+                person: person.id
+            }
+
+            Expense.update(req.param('id'), paramObj, function expenseUpdated(err) {
+                if (err) {
+                    console.log(err);
+
+                    req.session.flash = {
+                        err: err
+                    }
+
+                    return res.redirect('/expense/edit/' + req.param('id'));
+                }
+
+                res.redirect('/expense/show/' + req.param('id'));
+            });
+
         });
     },
 

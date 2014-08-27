@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="/styles/custom.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
+
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -29,18 +33,21 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
-            <li><a href="/person">Persons</a></li>
+            <li><a href="/person">People</a></li>
             <li><a href="/expense">Expenses</a></li>
           </ul>
-          <form role="form" class="navbar-form navbar-right" method="POST" action="/session/new">
-            <div class="form-group form-group-sm">
-              <input type="text" class="form-control" placeholder="Name">
+          <% if (!req.session.authenticated) { %>
+          <form role="form" class="navbar-form navbar-right" action="/session/create" method="POST">
+            <div class="input-group">
+              <input name="name" type="text" class="form-control" placeholder="Name" style="width: 50%;">
+              <input name="password" type="password" class="form-control" placeholder="Password" style="border-left: 0; width: 50%;">
+              <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="submit">Sign in</button>
+              </span>
             </div>
-            <div class="form-group form-group-sm">
-              <input type="password" class="form-control" placeholder="Password">
-            </div>
-            <button class="btn btn-success btn-sm" type="submit">Sign in</button>
           </form>
+          <% } %>
         </div>
       </div>
     </div>
@@ -52,11 +59,5 @@
     <!--TEMPLATES-->
     
     <!--TEMPLATES END-->
-
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.min.js"></script>
-    <!--SCRIPTS END-->
   </body>
 </html>

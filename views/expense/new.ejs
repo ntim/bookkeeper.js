@@ -1,25 +1,40 @@
-<form action="/expense/create" method="POST" role="form" class="new">
+<h2>Create an expense</h2>
+<form action="/expense/create" method="POST" class="form-horizontal" role="form">
 	<div class="form-group">
-	<h2>Create a expense</h2>
 
-<% if(flash && flash.err) { %>
-<ul class="alert alert-success">
-<% Object.keys(flash.err).forEach(function(error) { %>
-<li><%- JSON.stringify(flash.err[error]) %></li>
-<% }) %>
-</ul>
-<% } %>
+		<% if(flash && flash.err) { %>
+		<ul class="alert alert-success">
+			<% Object.keys(flash.err).forEach(function(error) { %>
+			<li><%- JSON.stringify(flash.err[error]) %></li>
+			<% }) %>
+		</ul>
+		<% } %>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-10">
+				<input name="name" type="text" class="form-control"/>
+			</div>
+		</div>
 
-	<div class="control-group" style = "width: 300px;">
-	<input type="text" class="form-control" placeholder="name" name="name">
-	</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Price</label>
+			<div class="col-sm-10">
+				<div class="input-group">
+					<input placeholder="0.00" name="price" type="text" class="form-control" />
+					<span class="input-group-addon">&euro;</span>
+				</div>
+			</div>
+		</div>
+		
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 
-	<div class="control-group" style = "width: 300px;">
-	<input type="text" class="form-control" placeholder="price" name="price">
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="submit" value="Submit" class="btn btn-primary"/>
+			</div>
+		</div>
 	</div>
-	
-	</div>
-	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-	<input type="submit" value="Submit" class="btn btn-default"/> | 
-	<a href="/expense">Back to list</a>
 </form>
+<hr>
+<a href="/expense" class="btn btn-danger">Back to list</a>

@@ -27,8 +27,8 @@ module.exports = function(req, res, next) {
                 message: "You are not permitted to perform this action."
             }]
         };
-        // User is not allowed
-        // (default res.forbidden() behavior can be overridden in `config/403.js`)
+        // Person is not allowed
+        req.session.redirect = req.url;
         return res.redirect('/session/new');
     });
 };
