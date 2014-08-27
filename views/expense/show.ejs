@@ -1,0 +1,29 @@
+<form class="show">
+	<div class="form-group">
+		<h2> a expense... </h2>
+
+		<div class="form-group" style="width: 400px;">
+		<label>Name</label>
+		<input value="<%= expense.name %>" name="name" type="text" class="form-control" disabled/>
+		</div>
+
+		<div class="form-group" style="width: 400px;">
+		<label>When</label>
+		<input value="<%= expense.when %>" name="when" type="text" class="form-control" disabled/>
+		</div>
+
+		<div class="form-group" style="width: 400px;">
+		<label>Price</label>
+		<input value="<%= expense.price %> &euro;" name="price" type="text" class="form-control" disabled/>
+		</div>
+
+		<div class="form-group" style="width: 400px;">
+		<label>Person</label>
+		<input value="<%= expense.person.name %>" name="Person" type="text" class="form-control" disabled/>
+		</div>
+		
+</div>
+</div>
+<a href="/expense/edit/<%=expense.id %>" class="btn btn-default">Edit</a> |
+<a href="/expense">Back to list</a>
+</form>

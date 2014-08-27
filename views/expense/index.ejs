@@ -1,0 +1,35 @@
+<div class="container">
+	<h3>Expense Listing</h3>
+	<table class='table table-hover table-condensed'>
+	<tr>
+
+	<th>Name</th>
+	<th>When</th>
+	<th>Price</th>
+	<th>Person</th>
+
+	<th></th>
+	<th></th>
+	<th></th>
+</tr>
+	<% _.forEach(expenses, function(expense) { %>
+    		<tr data-id="<%=expense.id %>" data-model="expense">
+
+    		<td><%= expense.name %></td>
+    		<td><%= expense.when %></td>
+    		<td><%= expense.price %> &euro;</td>
+    		<td><%= expense.person.name %></td>
+		
+			<td><a href="/expense/show/<%=expense.id %>"  class="btn btn-primary btn-sm" role="button">Show</a></td>
+			<td><a href="/expense/edit/<%=expense.id %>"  class="btn btn-primary btn-sm" role="button">Edit</a></td>
+
+			<td><form action="/expense/destroy/<%=expense.id %>" method="POST">
+				<input type="hidden" name="_method" value="delete"/>
+				<input type="submit" value="Delete"  class="btn btn-danger btn-sm" role="button"/>
+			</form></td>
+		</tr>
+<% }) %>
+	</table>
+	<a href="/expense/new/" class="btn btn-success btn-sm" role="button">New Expense</a> |
+	<a href="/">all scaffolds</a>
+</div>
