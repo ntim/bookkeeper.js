@@ -1,13 +1,13 @@
 module.exports = function(req, res, next) {
 
- res.locals.flash = {};
+    res.locals.flash = {};
 
- if(!req.session.flash) return next();
+    if (!req.session.flash) return next();
 
- res.locals.flash = _.clone(req.session.flash);
+    res.locals.flash = _.clone(req.session.flash);
 
- // clear flash
- req.session.flash = {};
+    // clear flash
+    req.session.flash = {};
 
- next();
+    next();
 };
