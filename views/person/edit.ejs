@@ -1,18 +1,40 @@
-	<form action="/person/update/<%=person.id%>" method="POST" class="edit">
+<h2>Edit person</h2>
+<form action="/person/update/<%=person.id%>" method="POST" class="form-horizontal" role="form">
 	<div class="form-group">
-		<h2> editing a person... </h2>
+
 		<% if(flash && flash.err) { %>
-<ul class="alert alert-success">
-<% Object.keys(flash.err).forEach(function(error) { %>
-<li><%- JSON.stringify(flash.err[error]) %></li>
-<% }) %>
-</ul>
-<% } %>
+		<ul class="alert alert-success">
+			<% Object.keys(flash.err).forEach(function(error) { %>
+			<li><%- JSON.stringify(flash.err[error]) %></li>
+			<% }) %>
+		</ul>
+		<% } %>
 		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-10">
+				<input value="<%= person.name %>" name="name" type="text" class="form-control" />
+			</div>
 		</div>
+
+		<!--
+		<div class="form-group">
+			<label class="col-sm-2 control-label">New password</label>
+			<div class="col-sm-10">
+				<input value="" placeholder="password" name="password" type="text" class="form-control" />
+			</div>
+		</div>
+		-->
+		
 		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-		<input type="submit" value="Update Person" class="btn btn-default"/>
-		<a href="/person/show/<%=person.id %>" class="btn btn-danger">Cancel</a>
-	</form>
-	
-	
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="submit" value="Edit" class="btn btn-primary"/>
+				<a href="/person/show/<%=person.id %>" class="btn btn-danger">Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>
+<hr>
+<a href="/person" class="btn btn-default">Back to list</a>

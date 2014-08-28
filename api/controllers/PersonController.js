@@ -49,11 +49,11 @@ module.exports = {
     },
 
     index: function(req, res, next) {
-        Person.find().populate('expenses').exec(function foundPersons(err, persons) {
+        Person.find().populate('expenses').exec(function foundPersons(err, people) {
             if (err) return next(err);
 
             res.view({
-                persons: persons
+                people: people
             });
         });
     },
@@ -73,8 +73,7 @@ module.exports = {
     update: function(req, res, next) {
 
         var paramObj = {
-            name: req.param('name'),
-            password: req.param('password')
+            name: req.param('name')
         }
 
         Person.update(req.param('id'), paramObj, function personUpdated(err) {

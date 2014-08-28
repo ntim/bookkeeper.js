@@ -8,7 +8,7 @@ var mean = persons.reduce(function(previous, current, index, array) {
     <div class="<%= col_class %>">&nbsp;</div>
   	<% persons.forEach(function(person) { %>
   	<div class="<%= col_class %>">
-  		<h2><a href="/person / show / <%= person.id %> "><%= person.name %></a></h2>
+  		<h2><a href="/person/show/<%= person.id %>"><%= person.name %></a></h2>
   	</div>
 	<% }) %>
 </div>
