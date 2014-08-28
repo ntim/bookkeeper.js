@@ -1,5 +1,5 @@
 <%
-var col_class = "col-md-" + Math.round(12 / (persons.length + 1));
+var col_class = "col-xs-" + Math.round(12 / (persons.length + 1));
 var mean = persons.reduce(function(previous, current, index, array) {
 	    return previous + persons[index].saldo();
 	}, 0.0) / persons.length; 
@@ -20,8 +20,8 @@ var mean = persons.reduce(function(previous, current, index, array) {
   		<% for(var i = person.expenses.length - 1; i >= Math.max(0, person.expenses.length - 12 - 1); i--) { %>
       <% var expense = person.expenses[i]; %>
   		<div class="row">
-  			<div class="col-md-3 text-muted"><%= expense.price.toFixed(2) %> &euro;</div>
-  			<div class="col-md-9 text-muted">
+  			<div class="col-xs-3 text-muted"><%= expense.price.toFixed(2) %> &euro;</div>
+  			<div class="col-xs-9 text-muted">
           <a href="/expense/show/<%= expense.id %>"><%= expense.name %></a>, <%=: expense.when | formatDate %></div>
   		</div>
   		<% } %>
