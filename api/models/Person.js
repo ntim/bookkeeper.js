@@ -6,6 +6,15 @@
  */
 
 var bcrypt = require('bcrypt');
+function hashPassword(values, next) {
+    bcrypt.hash(values.password, 10, function(err, hash) {
+        if (err) {
+            return next(err);
+        }
+        values.password = hash;
+        next();
+    });
+}
 
 module.exports = {
 
@@ -31,20 +40,14 @@ module.exports = {
             return s;
         }
     },
-    beforeCreate: function(attrs, next) {
-        bcrypt.genSalt(10, function(err, salt) {
-            if (err) {
-                return next(err);
-            }
-            bcrypt.hash(attrs.password, salt, function(err, hash) {
-                if (err) {
-                    return next(err)
-                };
-
-                attrs.password = hash;
-                next();
-            });
-        });
+    beforeCreate: function(values, next) {
+        hashPassword(values, next);
+    },
+    beforeUpdate: function(values, next) {
+        if (values.password) {
+            return hashPassword(values, next);
+        }
+        next();
     }
 
 };

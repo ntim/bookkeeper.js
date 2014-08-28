@@ -1,14 +1,8 @@
 <h2>Create an expense</h2>
-<form action="/expense/create" method="POST" class="form-horizontal" role="form">
+<form action="/expense/create" method="POST" class="form-horizontal" role="form" data-toggle="validator">
 	<div class="form-group">
 
-		<% if(flash && flash.err) { %>
-		<ul class="alert alert-success">
-			<% Object.keys(flash.err).forEach(function(error) { %>
-			<li><%- JSON.stringify(flash.err[error]) %></li>
-			<% }) %>
-		</ul>
-		<% } %>
+		<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><%- include ../flash.ejs %></div></div>
 		
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Name</label>
@@ -21,7 +15,7 @@
 			<label class="col-sm-2 control-label">Price</label>
 			<div class="col-sm-10">
 				<div class="input-group">
-					<input placeholder="0.00" name="price" type="text" class="form-control" />
+					<input id="input-price" placeholder="0.00" name="price" type="number" class="form-control" />
 					<span class="input-group-addon">&euro;</span>
 				</div>
 			</div>

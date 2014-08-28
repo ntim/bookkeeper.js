@@ -72,8 +72,18 @@ module.exports = {
 
     update: function(req, res, next) {
 
-        var paramObj = {
-            name: req.param('name')
+        var paramObj;
+        if (req.param('password')) {
+            paramObj = {
+                id: req.param('id'),
+                name: req.param('name'),
+                password: req.param('password')
+            };
+        } else {
+            paramObj = {
+                id: req.param('id'),
+                name: req.param('name')
+            };
         }
 
         Person.update(req.param('id'), paramObj, function personUpdated(err) {

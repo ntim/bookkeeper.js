@@ -16,6 +16,7 @@
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/validator.min.js"></script>
   </head>
 
   <body>
@@ -47,6 +48,10 @@
               </span>
             </div>
           </form>
+          <% } else { %>
+            <form role="form" class="navbar-form navbar-right" action="/session/destroy" method="GET">
+                <button class="btn btn-default" type="submit">Sign out</button>
+            </form>
           <% } %>
         </div>
       </div>

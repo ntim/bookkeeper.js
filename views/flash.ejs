@@ -1,0 +1,7 @@
+<% if(flash && flash.err) { %>
+	<div class="alert bg-danger">
+	<% Object.keys(flash.err).forEach(function(key) { %>
+		<p class="text-danger"><%- JSON.stringify(flash.err[key]) %></p>
+	<% }); %>
+	</div>
+<% } %>
