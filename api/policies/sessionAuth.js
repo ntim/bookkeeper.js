@@ -22,10 +22,10 @@ module.exports = function(req, res, next) {
             return next();
         }
         req.session.flash = {
-            err: [{
-                name: "notAuthenticated",
-                message: "You are not permitted to perform this action."
-            }]
+            err: {
+                error: "notPermitted", 
+                summary: "You must sign in to perform this action."
+            }
         };
         // Person is not allowed
         req.session.redirect = req.url;

@@ -1,7 +1,16 @@
-<% if(flash && flash.err) { %>
+<% if (flash && flash.err) { %>
 	<div class="alert bg-danger">
-	<% Object.keys(flash.err).forEach(function(key) { %>
-		<p class="text-danger"><%- JSON.stringify(flash.err[key]) %></p>
-	<% }); %>
+	<% if (flash.err.error && flash.err.summary) { %>
+		<p class="text-danger"><%= flash.err.summary %>
+			<% if (flash.err.invalidAttributes) { %>
+				:
+				<% Object.keys(flash.err.invalidAttributes).forEach(function(key) { %>
+				<p class="text-danger" style="margin-left: 15px"><strong><%= key %></strong>: <%= flash.err.invalidAttributes[key][0].message %></p>
+			<% }); } %>
+			</dl>
+		</p>
+	<% } else { %>
+		<p class="text-danger"><%= JSON.stringify(flash.err) %></p>
+	<% } %>
 	</div>
 <% } %>

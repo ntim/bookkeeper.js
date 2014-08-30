@@ -14,10 +14,10 @@ module.exports = {
     create: function(req, res, next) {
         if (!req.param('name') || !req.param('password')) {
             req.session.flash = {
-                err: [{
-                    name: "usernamePasswordRequired",
-                    message: "You must enter both a username and password."
-                }]
+                err: {
+                    error: "noUsernameAndPassword",
+                    summary: "You must enter both a username and password."
+                }
             };
             return res.redirect('/session/new');
         }
@@ -27,10 +27,10 @@ module.exports = {
             }
             if (!person) {
                 req.session.flash = {
-                    err: [{
-                        name: "personNotFound",
-                        message: "Could not find person."
-                    }]
+                    err: {
+                        error: "noPerson",
+                        summary: "Could not find matching person or password missmatched."
+                    }
                 };
                 return res.redirect('/session/new');
             }
@@ -40,10 +40,10 @@ module.exports = {
                 }
                 if (!valid) {
                     req.session.flash = {
-                        err: [{
-                            name: "namePasswordMissmatch",
-                            message: "Name and password missmatch."
-                        }]
+                        err: {
+                            error: "passwordMissmatch",
+                            summary: "Could not find matching person or password missmatched."
+                        }
                     };
                     return res.redirect('/session/new');
                 }

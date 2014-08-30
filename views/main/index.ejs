@@ -20,8 +20,8 @@ var mean = persons.reduce(function(previous, current, index, array) {
   		<% for(var i = person.expenses.length - 1; i >= Math.max(0, person.expenses.length - 12 - 1); i--) { %>
       <% var expense = person.expenses[i]; %>
   		<div class="row">
-  			<div class="col-xs-3 text-muted"><%= expense.price.toFixed(2) %> &euro;</div>
-  			<div class="col-xs-9 text-muted">
+  			<div class="col-xs-4 text-muted" style="white-space: nowrap;"><%= expense.price.toFixed(2) %> &euro;</div>
+  			<div class="col-xs-8 text-muted">
           <a href="/expense/show/<%= expense.id %>"><%= expense.name %></a>, <%=: expense.when | formatDate %></div>
   		</div>
   		<% } %>
@@ -41,7 +41,7 @@ var mean = persons.reduce(function(previous, current, index, array) {
 <div class="row">
   	<div class="<%= col_class %>">Delta</div>
 	<% persons.forEach(function(person) { %>
-	<% var delta = mean - person.saldo(); %>
+	<% var delta = person.saldo() - mean; %>
 	<div class="<%= col_class %>">
 		<p class="<%= delta < 0 ? "text-danger" : "text-success" %>"><%= delta.toFixed(2) %> &euro;</p>
 	</div>
