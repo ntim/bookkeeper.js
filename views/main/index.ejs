@@ -22,7 +22,11 @@ var mean = persons.reduce(function(previous, current, index, array) {
   		<div class="row">
   			<div class="col-xs-4 text-muted" style="white-space: nowrap;"><%= expense.price.toFixed(2) %> &euro;</div>
   			<div class="col-xs-8 hidden-xs text-muted">
-          <a href="/expense/show/<%= expense.id %>"><%= expense.name %></a>, <%=: expense.when | formatDate %></div>
+          <a href="/expense/show/<%= expense.id %>"><%= expense.name %></a>, <%=: expense.when | formatDate %>
+        </div>
+        <div class="col-xs-8 visible-xs text-muted">
+          <a href="/expense/show/<%= expense.id %>"><%= expense.name %></a>
+        </div>
   		</div>
   		<% } %>
   	</div>
