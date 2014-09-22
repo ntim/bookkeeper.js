@@ -8,17 +8,20 @@
 module.exports = {
 
     'new': function(req, res) {
-        res.view();
+        Person.find().exec(function(err, people) {
+            if (err) {
+                return next(err);
+            }
+            if (!people) {
+                return next('people don\'t exist.');
+            }
+            res.view({
+                people: people
+            });
+        });
     },
     create: function(req, res) {
-        var paramObj = {
-            name: req.param('name'),
-            price: req.param('price'),
-            person: req.session.person
-        }
-        // Create a User with the params sent from 
-        // the sign-up form --> new.ejs
-        Expense.create(paramObj, function expenseCreated(err, expense) {
+        Person.findOneByName(req.param('person')).exec(function(err, person) {
             if (err) {
                 console.log(err);
                 req.session.flash = {
@@ -26,7 +29,24 @@ module.exports = {
                 }
                 return res.redirect('/expense/new');
             }
-            res.redirect('/expense/show/' + expense.id);
+            var paramObj = {
+                name: req.param('name'),
+                price: req.param('price'),
+                person: person.id
+            }
+            // Create a User with the params sent from 
+            // the sign-up form --> new.ejs
+            Expense.create(paramObj, function expenseCreated(err, expense) {
+                if (err) {
+                    console.log(err);
+                    req.session.flash = {
+                        err: err
+                    }
+                    return res.redirect('/expense/new');
+                }
+                // res.redirect('/expense/show/' + expense.id);
+                res.redirect('/');
+            });
         });
     },
     show: function(req, res, next) {
