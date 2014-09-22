@@ -9,14 +9,28 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/bootstrapValidator.min.css">
     <link rel="stylesheet" href="/styles/custom.css">
     <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/validator.min.css">
     <!--STYLES END-->
 
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/validator.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("form").bootstrapValidator({
+          feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+          }
+        }).validate();
+      });
+    </script>
   </head>
 
   <body>
