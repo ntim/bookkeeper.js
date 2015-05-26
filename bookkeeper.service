@@ -1,0 +1,11 @@
+[Unit]
+Description = dashboard systemd service
+After = mediacenter.service
+ 
+[Service]
+Type = simple
+ExecStart = /usr/local/bin/node /home/osmc/bookkeeper.js/app.js --port=3000
+Restart = always
+ 
+[Install]
+WantedBy = multi-user.target
